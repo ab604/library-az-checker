@@ -27,7 +27,7 @@ class URLChecker:
         workflow_name = os.environ.get('GITHUB_WORKFLOW', 'unknown')
         repository = os.environ.get('GITHUB_REPOSITORY', 'unknown')
 
-        # Set standard headers for requests to mimic browser behavior
+        # Set headers for requests to mimic browser and provide server log tracking
         self.headers = {
             'User-Agent': f'GitHubActionLinkChecker/1.0 (Run:{run_id}; Workflow:{workflow_name}; Repo:{repository})',
             'X-GitHub-Action-Run': run_id,
