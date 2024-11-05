@@ -155,6 +155,30 @@ jobs:
         STATUS_MESSAGE: ${{ env.STATUS_MESSAGE }}
         ATTACHMENT: ${{ env.ATTACHMENT }}
 
+    # Create website directory
+    - name: Prepare website directory
+      if: always()
+      run: |
+        mkdir -p _site
+        cp index.html _site/
+        cp "${{ env.REPORT_FILE }}" _site/all_links.csv
+        if [ -f "${{ env.REPORT_404_FILE }}" ]; then
+          cp "${{ env.REPORT_404_FILE }}" _site/broken_links.csv
+        fi
+
+    # Setup and deploy to GitHub Pages
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: '_site'
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+
     # Prevent GitHub from disabling the workflow due to inactivity
     - name: Keepalive Workflow
       uses: gautamkrishnar/keepalive-workflow@2.0.7
