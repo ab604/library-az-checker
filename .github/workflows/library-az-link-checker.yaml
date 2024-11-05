@@ -155,17 +155,34 @@ jobs:
         STATUS_MESSAGE: ${{ env.STATUS_MESSAGE }}
         ATTACHMENT: ${{ env.ATTACHMENT }}
 
-    # Create website directory
-    - name: Prepare website directory
+    # Prepare website directory for deployment
+    - name: Prepare website artifacts
       if: always()
       run: |
+        # Create output directory
         mkdir -p _site
+    
+        # Verbose logging for debugging
+        echo "Preparing website artifacts in $(pwd)"
+        ls -la
+
+        # Copy essential files
         cp index.html _site/
-        cp "${{ env.REPORT_FILE }}" _site/all_links.csv
-        if [ -f "${{ env.REPORT_404_FILE }}" ]; then
-          cp "${{ env.REPORT_404_FILE }}" _site/broken_links.csv
+
+        # Copy link reports with error handling
+        if [[ -f "${{ env.REPORT_FILE }}" ]]; then
+          cp "${{ env.REPORT_FILE }}" _site/all_links.csv
+        else
+          echo "Warning: Link report file not found"
         fi
 
+        # Conditionally copy 404 report
+        if [[ -f "${{ env.REPORT_404_FILE }}" ]]; then
+          cp "${{ env.REPORT_404_FILE }}" _site/broken_links.csv
+        else
+          echo "No broken links report found"
+        fi
+        
     # Setup and deploy to GitHub Pages
     - name: Setup Pages
       uses: actions/configure-pages@v4
