@@ -1,0 +1,4 @@
+*.qmd
+.venv
+.vscode/
+*.txt

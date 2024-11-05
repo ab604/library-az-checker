@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Link Checker Report</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.5.2/css/tabulator.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.5.2/js/tabulator.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .report-date {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        #linkTable {
+            margin-top: 20px;
+            background-color: white;
+        }
+        .tab-buttons {
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #e0e0e0;
+            cursor: pointer;
+        }
+        .tab-button.active {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Library Link Checker Report</h1>
+        <div class="report-date">Report generated: <span id="reportDate"></span></div>
+        
+        <div class="tab-buttons">
+            <button class="tab-button active" onclick="loadData('all')">All Links</button>
+            <button class="tab-button" onclick="loadData('404')">Broken Links (404)</button>
+        </div>
+
+        <div id="linkTable"></div>
+    </div>
+
+    <script>
+        // Initialize table
+        let table = new Tabulator("#linkTable", {
+            height: "700px",
+            layout: "fitColumns",
+            pagination: true,
+            paginationSize: 25,
+            columns: [
+                {title: "URL", field: "url", sorter: "string", width: 300},
+                {title: "Status", field: "status", sorter: "number", width: 100},
+                {title: "Response Time", field: "response_time", sorter: "number"},
+                {title: "Page Found On", field: "source_page", sorter: "string"},
+                {title: "Link Text", field: "link_text", sorter: "string"}
+            ]
+        });
+
+        // Set current date
+        document.getElementById("reportDate").textContent = new Date().toLocaleDateString();
+
+        // Load data function
+        async function loadData(type) {
+            // Update active button
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Load appropriate CSV file
+            const fileName = type === '404' ? 'broken_links.csv' : 'all_links.csv';
+            try {
+                const response = await fetch(fileName);
+                const csvText = await response.text();
+                const data = parseCSV(csvText);
+                table.setData(data);
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        // Simple CSV parser
+        function parseCSV(csv) {
+            const lines = csv.split('\n');
+            const headers = lines[0].split(',').map(h => h.trim());
+            return lines.slice(1).filter(line => line.trim()).map(line => {
+                const values = line.split(',');
+                return headers.reduce((obj, header, i) => {
+                    obj[header] = values[i];
+                    return obj;
+                }, {});
+            });
+        }
+
+        // Load initial data
+        loadData('all');
+    </script>
+</body>
+</html>
