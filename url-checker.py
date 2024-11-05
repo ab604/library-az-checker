@@ -21,9 +21,19 @@ class URLChecker:
         self.max_concurrent = max_concurrent
         self.retry_delay = retry_delay
         self.semaphore = asyncio.Semaphore(max_concurrent)  # Initialize semaphore
+
+        # Get GitHub Actions context
+        run_id = os.environ.get('GITHUB_RUN_ID', 'unknown')
+        workflow_name = os.environ.get('GITHUB_WORKFLOW', 'unknown')
+        repository = os.environ.get('GITHUB_REPOSITORY', 'unknown')
+
         # Set standard headers for requests to mimic browser behavior
         self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36...',
+            'User-Agent': f'GitHubActionLinkChecker/1.0 (Run:{run_id}; Workflow:{workflow_name}; Repo:{repository})',
+            'X-GitHub-Action-Run': run_id,
+            'X-Workflow-Source': workflow_name,
+            'X-GitHub-Repository': repository,
+            # 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36...',
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
             'Accept-Language': 'en-US,en;q=0.5',
             'Connection': 'keep-alive',
