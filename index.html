@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Link Checker Report</title>
+    <title>Library A-Z Link Checker Report</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.5.2/css/tabulator.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.5.2/js/tabulator.min.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Roboto, sans-serif;
             margin: 20px;
             background-color: #f5f5f5;
         }
@@ -51,28 +51,45 @@
 </head>
 <body>
     <div class="container">
-        <h1>Library Link Checker Report</h1>
+        <h1>Library A-Z Link Checker Report</h1>
         <div class="report-date">Report generated: <span id="reportDate"></span></div>
         
         <div class="tab-buttons">
-            <button class="tab-button active" onclick="loadData('all')">All Links</button>
-            <button class="tab-button" onclick="loadData('404')">Broken Links (404)</button>
+            <button class="tab-button" onclick="loadData('all')">All Links</button>
+            <button class="tab-button active" onclick="loadData('404')">Broken Links (404)</button>
         </div>
 
         <div id="linkTable"></div>
     </div>
 
     <script>
-        // Initialize table
+        // Initialize table with link formatters
         let table = new Tabulator("#linkTable", {
             height: "700px",
             layout: "fitColumns",
             pagination: true,
             paginationSize: 25,
             columns: [
-                {title: "URL", field: "URL", sorter: "string", width: 300},
-                {title: "Status", field: "Status Code", sorter: "number", width: 100},
-                {title: "Page Found On", field: "Parent URL", sorter: "string"} 
+                {
+                    title: "URL", 
+                    field: "URL", 
+                    sorter: "string", 
+                    width: 300,
+                    formatter: function(cell) {
+                        const value = cell.getValue();
+                        return value ? `<a href="${value}" target="_blank">${value}</a>` : '';
+                    }
+                },
+                {title: "Status", field: "Status Code", sorter: "string", width: 100},
+                {
+                    title: "Page Found On", 
+                    field: "Parent URL", 
+                    sorter: "string",
+                    formatter: function(cell) {
+                        const value = cell.getValue();
+                        return value ? `<a href="${value}" target="_blank">${value}</a>` : '';
+                    }
+                } 
             ]
         });
 
@@ -112,8 +129,8 @@
             });
         }
 
-        // Load initial data
-        loadData('all');
+        // Load broken links by default
+        loadData('404');
     </script>
 </body>
 </html>
