@@ -22,6 +22,19 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative; /* Add this for positioning the logo */
+        }
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 90px; /* Adjust to match h1 size */
+            height: 90px;
         }
         h1 {
             color: #333;
@@ -47,14 +60,17 @@
             cursor: pointer;
         }
         .tab-button.active {
-            background-color: #007bff;
+            background-color: #005C84;
             color: white;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="page-header">
         <h1>Library A-Z Link Checker Report</h1>
+        <img src="img/black-stag.svg" alt="Black Stag Logo" class="logo">
+        </div>
         <div class="report-date">Report generated: <span id="reportDate"></span></div>
         
         <div class="tab-buttons">
@@ -87,7 +103,7 @@
                 {
                     title: "Status Emoji",
                     field: "Status Code",
-                    width: 100,
+                    width: 200,
                     formatter: function(cell) {
                         const statusCode = cell.getValue();
                         if (statusCode === '200') {
