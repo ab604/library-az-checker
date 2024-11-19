@@ -328,19 +328,15 @@
         // Set current date
         document.getElementById("reportDate").textContent = new Date().toISOString().split('T')[0];
 
-        document.getElementById('searchInput').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            table.setFilter(row => {
-                return (
-                    row.URL.toLowerCase().includes(searchTerm) ||
-                    row['Parent URL'].toLowerCase().includes(searchTerm) ||
-                    row['Status Code'].toLowerCase().includes(searchTerm)
-                );
-            });
-        });
 
         // Load data function
         async function loadData(type) {
+            // Clear search input
+            document.getElementById('searchInput').value = '';
+    
+            // Clear any existing filters
+            table.clearFilter();
+
             // Update active button
             document.querySelectorAll('.tab-button').forEach(btn => {
                 btn.classList.remove('active');
@@ -363,6 +359,27 @@
                 console.error('Error loading data:', error);
             }
         }
+
+        // Search event listener:
+        document.querySelector('.search-container').addEventListener('input', function(event) {
+            if (event.target.id === 'searchInput') {
+                const searchTerm = event.target.value.toLowerCase();
+
+                // Clear any existing filters first
+                table.clearFilter();
+
+                // Apply filter if search term is not empty
+                if (searchTerm) {
+                    table.setFilter(function(data) {
+                        return (
+                            (data.URL && data.URL.toLowerCase().includes(searchTerm)) ||
+                            (data['Parent URL'] && data['Parent URL'].toLowerCase().includes(searchTerm)) ||
+                            (data['Status Code'] && data['Status Code'].toLowerCase().includes(searchTerm))
+                        );
+                    });
+                }
+            }
+        });
 
         // Advanced CSV parser
         function parseCSV(csv) {
