@@ -1,92 +1,77 @@
-
-Last Updated on 2024-11-05
-
 # Library A-Z Link Checker
 
-## Overview
+Last Updated on 2024-11-19
 
-This GitHub Actions workflow automates the process of checking links on
-a library’s A-Z resources page. It performs web scraping, link
-collection, and link validation to check resources are accessible.
+This repository contains the python code and yaml workflow for
+collecting and checking the status of links on the
+<https://library.soton.ac.uk/az.php?> webpage.
 
-It may produce false positives or false negatives, so doesn’t entirely
-remove the need for manual validation, but should catch most broken
-links.
+## Link Collection
 
-## Features
+For link collection, the script crawls links found on the A-Z pages,but
+ignores links that point to downloadable files or emails.
 
-- 🕷️ Web Scraping: Uses Playwright to collect links from the library’s
-  A-Z page
-- 🔗 Link Validation: Checks the status of each collected link
-- 📊 Reporting: Generates detailed CSV reports of link statuses
-- 📧 Notifications: Sends email alerts about broken links
-- ⏰ Scheduled Runs: Automatically checks links weekly
+The link crawler and collection code is in `get-az-links.py` and this is
+run as part of the GitHub Actions workflow. It also generate a CSV file
+with the collected links which is used by the link checker script and
+also written to the `reports` directory.
 
-## Workflow Components
+## Link Checking
 
-### Scripts
+The link checker validates the status of links found by
+`get-az-links.py`. This reads the CSV file and then checks the status of
+each link, reporting the status of all links and separately reporting
+any 404 broken links as CSV files.
 
-1.  `get-az-links.py`
-    - Scrapes links from the library’s A-Z page
-    - Saves links to a dated CSV file
-    - Uses Playwright for robust web scraping
-2.  `url-checker.py` (not shown in provided code)
-    - Validates collected links
-    - Checks HTTP status codes
-    - Generates link status reports
+The link checker code is in `url-checker.py` and provides User-Agent
+headers identifying the source of the request as the GitHub Actions
+workflow to enable server log filtering.
 
-### GitHub Actions Workflow
+## Github Actions Workflow
 
-- **Trigger**: Weekly on Mondays at 06:00 UTC
-- **Manual Dispatch**: Can be triggered manually
-- **Caching**: Implements caching for pip packages and Playwright
-  browsers
-- **Reporting**: Commits link reports to the repository
-- **Notification**: Sends email with link status
+The GitHub Actions workflow is in `library-az-link-checker.yaml` that
+runs as a cron job weekly on Mondays at 0600 UTC, or can be triggered
+manually from Github.
 
-## Prerequisites
+The Action workflow runs as an Ubuntu Linux container that has
+Playwright and Python and dependencies installed and cached.
 
-- Python 3.x
-- Playwright
-- GitHub Actions enabled repository
+The workflow runs the link crawler, link checker, and the publishes the
+results to Github Pages and sends an email notification as to whether
+404 broken links were found or not, along with a link to the results.
 
-## Configuration
+The workflow is also commits the CSV files of links to the repository in
+the `reports` directory and has a job to keep the workflow alive even if
+no commits are made to the repository.
 
-### Required Secrets
+The workflow uses the following secrets in the GitHub repository:
 
-Configure the following secrets in your GitHub repository:
-
-- `AZ_URL`: Base URL of the library A-Z page
-- `GMAIL_USERNAME`: SMTP email username
-- `GMAIL_PASSWORD`: Your App Password. See [Create App
+- `AZ_URL`: Base URL for the link collection (this isn’t necessary as a
+  secret, but makes updating easier in the future)
+- `GMAIL_USERNAME`: Gmail address used for email notification
+- `GMAIL_PASSWORD`: App Password for email notification. See [Create App
   passwords](https://knowledge.workspace.google.com/kb/how-to-create-app-passwords-000009237)
 - `LL_EMAIL_RECIPIENT`: Primary email recipient
-- `EMAIL_RECIPIENT`: CC email recipient
-- `EMAIL_SENDER`: Sender email address
+- `EMAIL_RECIPIENT`: CC email recipient (if desired)
 
-## Usage
+## Github Pages Report
 
-1.  Fork the repository
-2.  Set up required secrets
-3.  The workflow will run automatically or can be manually triggered
+The Github Pages report is built from the `index.html` file. It displays
+two tables: **All links** and **Broken links (404)**.
 
-## Output
+- All links is the table that includes both working and broken links.
+- Broken links (404) is the table that includes only broken links.
 
-- CSV files in `reports/` directory
-  - `az-links-{date}.csv`: Collected links
-  - `link-report-{date}.csv`: Link validation results
-  - `404-report-{date}.csv`: Broken link details (if applicable)
+The table displays these columns:
 
-## Contributing
+- URL is the URL of the checked link.
+- Status Code is the HTTP status code of the checked link.
+- Status Emoji is a visual indicator of the status code: 💙 for 200 OK,
+  💔 for 404 broken, 😕 for any other status.
+- Page Found On is the webpage on which the link occurs.
 
-Contributions are welcome! Please: - Fork the repository - Create a
-feature branch - Submit a pull request
+The table can be filtered using the search box and either the filtered
+or unfiltered data can be downloaded as a CSV file.
 
-## License
-
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-
-## Support
-
-For issues or questions, please create a GitHub issue and/or check the
-existing documentation.
+The page also contains contact information and a link back to this
+repository.

@@ -149,7 +149,7 @@ jobs:
         #attachments: ${{ env.ATTACHMENT }}
         to: ${{secrets.LL_EMAIL_RECIPIENT}}
         cc: ${{secrets.EMAIL_RECIPIENT}}
-        from: Library Linkchecker ${{secrets.EMAIL_SENDER}}
+        from: Library Linkchecker
         priority: normal
         secure: true
       env:
