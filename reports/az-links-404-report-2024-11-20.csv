@@ -1,0 +1,32 @@
+URL,Status Code,Content-Type,Parent URL,Input Line
+https://www.math.fsu.edu/Virtual/,404,text/html; charset=UTF-8,https://library.soton.ac.uk/az.php?,43
+https://www.keynote.co.uk/check?type=shibboleth&entityID=https://webauth.soton.ac.uk/shibboleth,404,text/html; charset=UTF-8,https://library.soton.ac.uk/az.php?,93
+https://opendocs.ids.ac.uk/opendocs/handle/123456789/3,404,text/html;charset=UTF-8,https://library.soton.ac.uk/az.php?,99
+https://library.soton.ac.uk/enquiries,404,text/html; charset=UTF-8,https://library.soton.ac.uk/az.php?,114
+https://www.bl.uk/manuscripts/,404,text/html,https://library.soton.ac.uk/az.php?,206
+https://elibrary.unm.edu/sora/index.php,404,text/html; charset=UTF-8,https://library.soton.ac.uk/az.php?,349
+https://help.nla.gov.au/trove/using-trove/getting-using-resources/using-resources,404,text/html; charset=UTF-8,https://library.soton.ac.uk/az.php?,464
+https://lloydslist.maritimeintelligence.informa.com/customer-support/training-videos,404,text/html; charset=utf-8,https://library.soton.ac.uk/az.php?,533
+http://library.soton.ac.uk/tutorials/esbco,404,text/html; charset=UTF-8,https://library.soton.ac.uk/az.php?,552
+https://www.bl.uk/bipc/dbandpubs/intpropres/index.html,404,text/html,https://library.soton.ac.uk/az.php?,606
+https://www.bl.uk/business-and-management,404,text/html,https://library.soton.ac.uk/az.php?,705
+https://www.hermitagemuseum.org/fcgi-bin/db2www/browse.mac/category?selLang=English,404,text/html; charset=utf-8,https://library.soton.ac.uk/az.php?,732
+https://www.bl.uk/catalogues-and-collections/digital-collections,404,text/html,https://library.soton.ac.uk/az.php?,754
+https://faculty.washington.edu/snoegel/okeanos.html,404,text/html,https://library.soton.ac.uk/az.php?,812
+https://www.edshare.soton.ac.uk/8893/,404,text/html; charset=utf-8,https://library.soton.ac.uk/az.php?,891
+https://www.nlc-bnc.ca/thesescanada/,404,text/html; charset=utf-8,https://library.soton.ac.uk/az.php?,57
+https://www.campbellcollaboration.org/library.html,404,text/html; charset=UTF-8,https://library.soton.ac.uk/az.php?,66
+https://www.hse.gov.uk/business/casestudy.htm,404,text/html,https://library.soton.ac.uk/az.php?,171
+https://www.bailii.org/bailii/BAILII_IALS_quick_guide.pd,404,text/html,https://library.soton.ac.uk/az.php?,199
+https://www.uk.sagepub.com/archive.sp,404,text/html; charset=utf-8,https://library.soton.ac.uk/az.php?,212
+https://www.acm.org/publications/latex_style/,404,text/html;charset=UTF-8,https://library.soton.ac.uk/az.php?,228
+https://www.bl.uk/sounds,404,text/html,https://library.soton.ac.uk/az.php?,240
+https://www.archives.soton.ac.uk/jewish/,404,text/html; charset=utf-8,https://library.soton.ac.uk/az.php?,305
+https://library.soton.ac.uk/regulations,404,text/html; charset=utf8,https://library.soton.ac.uk/az.php?,333
+https://www.bl.uk/social-welfare,404,text/html,https://library.soton.ac.uk/az.php?,349
+https://bcs.bedfordstmartins.com/resdoc5e/RES5e_ch08_s1-0001.html,404,text/html,https://library.soton.ac.uk/az.php?,356
+https://www.bl.uk/reshelp/bldept/music/,404,text/html,https://library.soton.ac.uk/az.php?,385
+https://www.ukop.co.uk/members/advancedsearch_boolean.aspx,404,text/html; charset=UTF-8,https://library.soton.ac.uk/az.php?,389
+https://datashare.ed.ac.uk/handle/10283/2345 ,404,text/html;charset=utf-8,https://library.soton.ac.uk/az.php?,445
+https://www.bl.uk/reshelp/findhelplang/german/germanaustrianexiles/germanaustrianexiles.html,404,text/html,https://library.soton.ac.uk/az.php?,473
+https://www.bl.uk/catalogues-and-collections/digital-collections#,404,text/html,https://library.soton.ac.uk/az.php?,609
