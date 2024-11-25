@@ -62,12 +62,11 @@ jobs:
         pip install playwright aiohttp beautifulsoup4 aiohttp_retry tenacity
         
     # Install Playwright browsers if not found in cache
-    - name: Install Playwright browsers (if not cached)
+    - name: Install Playwright browsers
       run: |
-        if [ ! -d ~/.cache/ms-playwright/chromium-* ]; then
-          playwright install chromium
-          playwright install-deps chromium
-        fi
+        playwright install chromium
+        playwright install-deps chromium
+        
       
     # Execute script to gather links
     - name: Run Get Links
