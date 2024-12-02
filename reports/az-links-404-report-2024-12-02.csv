@@ -1,1 +1,22 @@
 URL,Status Code,Content-Type,Parent URL,Input Line
+https://www.bl.uk/sounds,404,text/html,https://library.soton.ac.uk/az/databases?a=b,172
+https://www.bl.uk/bipc/dbandpubs/intpropres/index.html,404,text/html,https://library.soton.ac.uk/az/databases?a=b,183
+https://www.bl.uk/catalogues-and-collections/digital-collections,404,text/html,https://library.soton.ac.uk/az/databases?a=b,184
+https://www.bl.uk/reshelp/bldept/music/,404,text/html,https://library.soton.ac.uk/az/databases?a=b,188
+https://www.bl.uk/manuscripts/,404,text/html,https://library.soton.ac.uk/az/databases?a=b,191
+https://www.bailii.org/bailii/BAILII_IALS_quick_guide.pd,404,text/html,https://library.soton.ac.uk/az/databases?a=b,205
+https://www.bl.uk/business-and-management,404,text/html,https://library.soton.ac.uk/az/databases?a=b,206
+https://www.bl.uk/social-welfare,404,text/html,https://library.soton.ac.uk/az/databases?a=b,222
+https://www.bl.uk/reshelp/findhelplang/german/germanaustrianexiles/germanaustrianexiles.html,404,text/html,https://library.soton.ac.uk/az/databases?a=g,611
+https://www.hse.gov.uk/business/casestudy.htm,404,text/html,https://library.soton.ac.uk/az/databases?a=h,677
+https://opendocs.ids.ac.uk/opendocs/handle/123456789/3,404,text/html;charset=UTF-8,https://library.soton.ac.uk/az/databases?a=i,712
+https://www.archives.soton.ac.uk/jewish/,404,text/html; charset=utf-8,https://library.soton.ac.uk/az/databases?a=j,854
+https://www.acm.org/publications/latex_style/,404,text/html;charset=UTF-8,https://library.soton.ac.uk/az/databases?a=l,931
+https://www.edshare.soton.ac.uk/8893/,404,text/html; charset=utf-8,https://library.soton.ac.uk/az/databases?a=m,73
+https://clutejournals.com/index.php/JBCS,404,text/html,https://library.soton.ac.uk/az/databases?a=o,168
+http://library.soton.ac.uk/tutorials/esbco,404,text/html; charset=UTF-8,https://library.soton.ac.uk/az/databases?a=p,283
+https://unispal.un.org/unispal.nsf/udc.htm,404,text/html; charset=iso-8859-1,https://library.soton.ac.uk/az/databases?a=q,302
+https://datashare.ed.ac.uk/handle/10283/2345 ,404,text/html;charset=utf-8,https://library.soton.ac.uk/az/databases?a=s,457
+https://www.open.ac.uk/Arts/RED/,404,text/html; charset=UTF-8,https://library.soton.ac.uk/az/databases?a=t,467
+https://www.bl.uk/catalogues-and-collections/digital-collections#,404,text/html,https://library.soton.ac.uk/az/databases?a=t,516
+https://library.soton.ac.uk/regulations,404,text/html; charset=utf8,https://library.soton.ac.uk/az/databases?a=u,582
