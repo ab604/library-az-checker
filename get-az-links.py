@@ -16,6 +16,15 @@ base_url = os.environ['BASE_URL'] # "https://library.soton.ac.uk/az/databases"
 if not base_url:
         base_url = "https://library.soton.ac.uk/az/databases"
 
+# Define the alphabet to iterate over
+alphabet = list('abcdefghijklmnopqrstuvwxyz') + ['pound']
+
+# Create a list of URLs to check
+urls_to_check = [f"{base_url}?a={letter}" for letter in alphabet]
+
+selectors = ['.az-item a:not(.az-description-view-more-link)',
+'a.az-title']
+
 async def get_links_with_playwright(url):
     """
     Asynchronously scrapes links from the specified URL using Playwright.
@@ -31,18 +40,20 @@ async def get_links_with_playwright(url):
             await page.goto(url, wait_until='networkidle')
             
             # Wait for the results container to load
-            await page.wait_for_selector('.s-lg-az-result', timeout=30000)
+            await page.wait_for_selector('#s-lg-az-cols', timeout=30000)
             
             # Extract all links from the results
-            elements = await page.query_selector_all('.s-lg-az-result a')
-            for element in elements:
-                href = await element.get_attribute('href')
-                # Filter out invalid or unwanted link types
-                if href and not href.startswith(('mailto:', '#', 'javascript:', 'tel:')):
-                    # Convert protocol-relative URLs to absolute URLs
-                    if href.startswith('//'):
-                        href = 'https:' + href
-                    links.add(href)
+            for selector in selectors:
+                elements = await page.query_selector_all(selector)
+                #'div.az-item:nth-child(16) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)') #('a.az-title')
+                for element in elements:
+                    href = await element.get_attribute('href')
+                    # Filter out invalid or unwanted link types
+                    if href and not href.startswith(('mailto:', '#', 'javascript:', 'tel:')):
+                        # Convert protocol-relative URLs to absolute URLs
+                        if href.startswith('//'):
+                            href = 'https:' + href
+                        links.add(href)
             
         except Exception as e:
             print(f"Error getting links from {url}: {str(e)}")
@@ -60,7 +71,7 @@ async def main():
     print(f"Starting link collection for {base_url}")
     
     # Collect links using Playwright
-    links = await get_links_with_playwright(base_url)
+    #links = await get_links_with_playwright(urls_to_check)
 
     # Create reports directory if it doesn't exist
     os.makedirs('reports', exist_ok=True)
@@ -73,8 +84,12 @@ async def main():
     with open(links_file, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['URL', 'Parent URL'])
-        for link in links:
-            writer.writerow([link, base_url])
+        # Loop through each URL in urls_to_check
+        for url in urls_to_check:
+            print(f"Processing URL: {url}")
+            links = await get_links_with_playwright(url)
+            for link in links:
+                writer.writerow([link, url])  # Write link and parent URL to CSV
 
     # Set environment variable for GitHub Actions
     print(f"LINKS_FILE={links_file}")
