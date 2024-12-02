@@ -12,9 +12,9 @@ from playwright.async_api import async_playwright
 from datetime import datetime
 
 # Define the target URL for scraping
-base_url = os.environ['BASE_URL'] # "https://library.soton.ac.uk/az.php?"
+base_url = os.environ['BASE_URL'] # "https://library.soton.ac.uk/az/databases"
 if not base_url:
-        base_url = "https://library.soton.ac.uk/az.php?"
+        base_url = "https://library.soton.ac.uk/az/databases"
 
 async def get_links_with_playwright(url):
     """
