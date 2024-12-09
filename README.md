@@ -4,7 +4,7 @@ Last Updated on 2024-11-19
 
 This repository contains the python code and yaml workflow for
 collecting and checking the status of links on the
-<https://github.com/ab604/library-az-checker> webpage.
+<https://library.soton.ac.uk/az/databases> webpage.
 
 ## Link Collection
 
