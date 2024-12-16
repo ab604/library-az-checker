@@ -1,0 +1,12 @@
+URL,Status Code,Content-Type,Parent URL,Input Line
+https://www.bl.uk/sounds,404,text/html,https://library.soton.ac.uk/az/databases?a=b,167
+https://www.bailii.org/bailii/BAILII_IALS_quick_guide.pd,404,text/html,https://library.soton.ac.uk/az/databases?a=b,172
+https://www.bl.uk/bipc/dbandpubs/intpropres/index.html,404,text/html,https://library.soton.ac.uk/az/databases?a=b,200
+https://www.bl.uk/social-welfare,404,text/html,https://library.soton.ac.uk/az/databases?a=b,205
+https://www.bl.uk/catalogues-and-collections/digital-collections,404,text/html,https://library.soton.ac.uk/az/databases?a=b,211
+https://www.bl.uk/business-and-management,404,text/html,https://library.soton.ac.uk/az/databases?a=b,216
+https://www.bl.uk/manuscripts/,404,text/html,https://library.soton.ac.uk/az/databases?a=b,240
+https://www.bl.uk/reshelp/bldept/music/,404,text/html,https://library.soton.ac.uk/az/databases?a=b,247
+https://www.bl.uk/reshelp/findhelplang/german/germanaustrianexiles/germanaustrianexiles.html,404,text/html,https://library.soton.ac.uk/az/databases?a=g,634
+https://datashare.ed.ac.uk/handle/10283/2345 ,404,text/html;charset=utf-8,https://library.soton.ac.uk/az/databases?a=s,433
+https://www.bl.uk/catalogues-and-collections/digital-collections#,404,text/html,https://library.soton.ac.uk/az/databases?a=t,534
