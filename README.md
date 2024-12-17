@@ -1,10 +1,13 @@
 # Library A-Z Link Checker
 
-Last Updated on 2024-12-09
+Last Updated on 2024-12-17
+
+This repo has been retired here and is now at
+<https://github.com/UniSotonLibrary/library-az-checker>
 
 This repository contains the python code and yaml workflow for
 collecting and checking the status of links on the
-<https://library.soton.ac.uk/az/databases> webpage.
+<https://library.soton.ac.uk/az.php?> webpage.
 
 ## Link Collection
 
